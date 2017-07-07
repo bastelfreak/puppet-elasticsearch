@@ -11,6 +11,9 @@ Puppet::Type.type(:elasticsearch_plugin).provide(
     commands :plugin => '/usr/local/elasticsearch/bin/plugin'
     commands :es => '/usr/local/elasticsearch/bin/elasticsearch'
     commands :javapathhelper => '/usr/local/bin/javaPathHelper'
+  when 'Archlinux'
+    commands :plugin => '/usr/bin/elasticsearch-plugin'
+    commands :es => '/usr/bin/elasticsearch'
   else
     commands :plugin => '/usr/share/elasticsearch/bin/plugin'
     commands :es => '/usr/share/elasticsearch/bin/elasticsearch'
