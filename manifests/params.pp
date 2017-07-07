@@ -100,6 +100,9 @@ class elasticsearch::params {
     'Gentoo': {
       $package = 'app-misc/elasticsearch'
     }
+    'Archlinux': {
+      $package = 'elasticsearch'
+    }
     default: {
       fail("\"${module_name}\" provides no package default value
             for \"${::operatingsystem}\"")
@@ -240,6 +243,17 @@ class elasticsearch::params {
       $defaults_location    = undef
       $init_template        = 'elasticsearch.OpenBSD.erb'
       $pid_dir              = '/var/run/elasticsearch'
+    }
+    'Archlinux': {
+      $service_name         = 'elasticsearch'
+      $service_hasrestart   = true
+      $service_hasstatus    = true
+      $service_pattern      = undef
+      $service_providers    = 'systemd'
+      $defaults_location    = '/etc/default'
+      $init_template        = 'elasticsearch.Archlinux.erb'
+      $pid_dir              = '/var/run/elasticsearch'
+      $systemd_service_path = '/etc/systemd/system/'
     }
     default: {
       fail("\"${module_name}\" provides no service parameters
