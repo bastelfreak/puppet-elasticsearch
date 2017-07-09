@@ -94,8 +94,8 @@ define elasticsearch::service::systemd (
   )
 
   $notify_service = $elasticsearch::restart_config_change ? {
-    true  => [ Exec["systemd_reload_${name}"], Service["elasticsearch-instance-${name}"] ],
-    false => Exec["systemd_reload_${name}"]
+    true  => [ Exec['systemctl-daemon-reload'], Service["elasticsearch-instance-${name}"] ],
+    false => Exec['systemctl-daemon-reload']
   }
 
   if ($ensure == 'present') {
@@ -168,7 +168,8 @@ define elasticsearch::service::systemd (
 
     }
 
-    $service_require = Exec["systemd_reload_${name}"]
+  include ::systemd
+  $service_require = Exec['systemctl-daemon-reload']
 
   } else { # absent
 
@@ -185,11 +186,6 @@ define elasticsearch::service::systemd (
     }
 
     $service_require = undef
-  }
-
-  exec { "systemd_reload_${name}":
-    command     => '/bin/systemctl daemon-reload',
-    refreshonly => true,
   }
 
   # action
