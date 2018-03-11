@@ -90,6 +90,9 @@
         "12.1",
         "12.2"
       ]
+    },
+    {
+      "operatingsystem": "Archlinux"
     }
   ],
   "requirements": [
