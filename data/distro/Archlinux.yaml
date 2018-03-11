@@ -1,0 +1,3 @@
+---
+elasticsearch::manage_repo: false
+elasticsearch::defaults_location: /etc/default
